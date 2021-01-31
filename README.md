@@ -10,7 +10,11 @@ We are able to do the following operations to update/change the membership list:
 
 
 ## System Design Requirements 
-
+<details>
+<a name="Design Requirements"></a>
+<summary>Show/Hide</summary>
+<br>
+ 
 Within a group of machines, when a machine joins or rejoins, there must be a timestamp, IP address and name of the machine. Failure of a machine must be reflected in at least one
 membership list within 10 seconds and it must be no longer than 10 seconds, no matter what the network latencies might be. Any change/update to a list must be disseminated 
 to all other lists within 15 seconds.
@@ -24,9 +28,14 @@ Logs have to be created at each machine, recording when a machine has joined, le
 must include:
 1. Each time a change is made to the local membership list (join, leave or failure).
 2. Each time a failure is detected or communicated from one machine to another.
+</details>
 
 ## Implementation
-
+<details>
+<a name="File_Description"></a>
+<summary>Show/Hide</summary>
+<br>
+ 
 I have designed and built this project using the principles of Microservices, which includes various loosely coupled modules which interact with each other to produce the expected result. A Microservices architecture gives us the option to easily add or remove modules without making drastic changes to the overall code base. This gives us the option of scalability if we choose to do so.
 
 To implement the SWIM-style failure dissemination system I heavily utilized a dynamic data structure (Hash-maps) which scales easily without any collisions. This lets us add many machines to the system without having to worry about scalability. The time complexity of looking up an element is a constant in a hash-map, which allows for quick lookups and value retrieval. The time complexity of adding a new machine is linear and hence the worst time case is **O(N)**. This will scale very well with the addition of new machines.
@@ -36,9 +45,14 @@ pings a machine P<sub>j</sub> in its membership list. Upon waiting for an ACK fo
 waits another 10 seconds for ACKs from any of the members in the list and upon not receiving even a single ACK it declares P<sub>j</sub> as crashed, logs the IP address and
 timestamp in the log and then pings to every other member in its list. Now every member sends this information to every other member in their list. This is how information is 
 disseminated in the system.
+</details>
 
 ## File Descriptions
-
+<details>
+<a name="File_Description"></a>
+<summary>Show/Hide</summary>
+<br>
+ 
 * **_server.py_**: This file consists of the list of all available machines and their respective IP
 addresses in the system.
 
@@ -71,10 +85,14 @@ use JSON files to maintain data persistency.
 machines.
 
 * **_SWIM.py_**: Is used to remove the crashed processes from the membership lists.
-
+</details>
 
 ## Instructions
-
+<details>
+<a name="File_Description"></a>
+<summary>Show/Hide</summary>
+<br>
+ 
 1. The first file to be run is the **_client.py_** file. Input as many machines as you'd like by pressing option 1. The machines can be anything from m1 to m_integer (i.e: m1,m2,3, etc). Pressing option 2 gives you the choice to remove a machine. Only machines which have already been added are available to you.
 
 2. The next program to be run is **_members.py_**. You will see that the membership list is created for each of the processes which are active. Each process will have a Membership List which has at least 3 other processes selected at random.
@@ -84,3 +102,4 @@ machines.
 4. Next to be run is **_SWIM.py_**. This program eliminates the crashed processes from the main list. Just running the program is enough, no need to give any inputs.
 
 5. Next run **_SWIM_protocol.py_**, this is the actual implementation of the SWIM algorithm, where active processes are pinged and their membership lists are updated regularly and from that is determined which processes are active and respond to the ping requests and which processes have crashed and don't respond any longer.
+</details>
