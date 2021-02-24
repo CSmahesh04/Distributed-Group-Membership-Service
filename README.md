@@ -97,7 +97,7 @@ machines.
 
 2. The next program to be run is **_members.py_**. You will see that the membership list is created for each of the processes which are active. Each process will have a Membership List which has at least 3 other processes selected at random.
 
-3. The next program that should be run is **_crash_process.py_**. Here you can list all the processes that you want to crash (Do not exceed 3 at a time). This changes these processes to "crashed"
+3. The next program that should be run is **_crash_process.py_**. Here you can list all the processes that you want to crash (Do not exceed 3 at a time). This changes these processes to "crashed".
 
 4. Next to be run is **_SWIM.py_**. This program eliminates the crashed processes from the main list. Just running the program is enough, no need to give any inputs.
 
