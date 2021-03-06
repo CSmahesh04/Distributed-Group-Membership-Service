@@ -1,4 +1,4 @@
-<h1 align='center'>DISTRIBUTED GROP MEMBERSHIP SYSTEM</h1> 
+<h1 align='center'>DISTRIBUTED GROUP MEMBERSHIP SYSTEM</h1> 
 
 I have built a distributed service which maintains, at each machine, a list of machines that are connected to it. This mimics a real life distributed system where machines 
 connected to each have a way to recognize when another machine has failed and to disseminate this information to the remaining machines in the connection.
